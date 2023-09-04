@@ -38,7 +38,6 @@ dependencies:
   lottie: ^2.3.2
   http: ^0.13.6
   flutter_riverpod: ^2.3.6
-  searchable_listview: ^2.4.0
   search_page: ^2.3.0
   geolocator: ^9.0.2
   geocoding: ^2.1.0

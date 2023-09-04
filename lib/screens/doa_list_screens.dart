@@ -10,7 +10,6 @@ import 'package:quran/riverpods/doa_list_riverpod.dart';
 
 import 'package:quran/screens/detail_doa_screen.dart';
 import 'package:quran/widgets/doa_list.dart';
-import 'package:searchable_listview/searchable_listview.dart';
 
 class DoaList extends ConsumerStatefulWidget {
   const DoaList({super.key});
@@ -64,37 +63,12 @@ class _DoaListState extends ConsumerState<DoaList> {
           child: CircularProgressIndicator(),
         ),
         data: (data) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SearchableList<Doa>(
-              initialList: data,
-              autoFocusOnSearch: false,
-              keyboardAction: TextInputAction.search,
-              builder: (dataList) => DoaListWidget(
-                data: dataList,
-                navDetail: (context, doaDetail) {
-                  _navDetailDoa(context, doaDetail);
-                },
-              ),
-              filter: (value) => data
-                  .where(
-                    (element) => element.doa.toLowerCase().contains(value),
-                  )
-                  .toList(),
-              emptyWidget: const Expanded(
-                child: Center(
-                  child: Text('No data'),
-                ),
-              ),
-              inputDecoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(20),
-                hintText: "Search Doa",
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-            ),
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final Doa doa = data[index];
+              return DoaListWidget(data: doa, navDetail: _navDetailDoa);
+            },
           );
         },
       ),

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 
 import 'package:geolocator/geolocator.dart';
-import 'package:quran/models/jadwal_sholat_model.dart';
+
 import 'package:quran/riverpods/jadwal_sholat_riverpod.dart';
 import 'package:quran/widgets/jadwal_sholat_list.dart';
 
@@ -63,10 +63,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
         position = getPosition;
         userPlace = '${place.subAdministrativeArea}';
       });
-      print('${getPosition.latitude}, ${getPosition.longitude}');
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
     setState(() {
       isLoading = false;
     });

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quran/widgets/bottom_navbar.dart';
+
 import 'package:quran/widgets/card_widget.dart';
 import 'package:quran/widgets/gridview_widget.dart';
 
@@ -36,7 +36,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const BottomNav(),
     );
   }
 }

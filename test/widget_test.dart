@@ -28,5 +28,4 @@ main() async {
   Map<String, dynamic> jadwal =
       (jsonDecode(responseData.body) as Map<String, dynamic>)['jadwal'];
   JadwalSholat jadwalDataApi = JadwalSholat.fromJson(jadwal);
-  print(jadwalDataApi.data.dzuhur);
 }
