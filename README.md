@@ -1,6 +1,6 @@
 # Quran
 
-An Application that gives you the features of reading the Quran, dua, etc
+This is my First Application i make using Flutter :smile_cat:. This Application contains reading quran, dua, etc. Hope This Usefull :heart_eyes_cat:
 
 
 -## Demo Application
