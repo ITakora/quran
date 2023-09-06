@@ -102,61 +102,57 @@ class _QuranListScreenState extends ConsumerState<QuranListScreen> {
           data: (data) {
             List<Surah> dataList = data;
 
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: searchController.isNotEmpty
-                          ? searchController.length
-                          : dataList.length,
-                      itemBuilder: (context, index) {
-                        final Surah surah = searchController.isNotEmpty
-                            ? searchController[index]
-                            : dataList[index];
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                    itemCount: searchController.isNotEmpty
+                        ? searchController.length
+                        : dataList.length,
+                    itemBuilder: (context, index) {
+                      final Surah surah = searchController.isNotEmpty
+                          ? searchController[index]
+                          : dataList[index];
 
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                            right: 8,
-                            top: 8,
-                          ),
-                          child: ListTile(
-                            onTap: () {
-                              _navToDetail(surah);
-                            },
-                            leading: Container(
-                                width: 50,
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          right: 8,
+                          top: 8,
+                        ),
+                        child: ListTile(
+                          onTap: () {
+                            _navToDetail(surah);
+                          },
+                          leading: Container(
+                              width: 50,
+                              alignment: Alignment.center,
+                              child: Stack(
                                 alignment: Alignment.center,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Image.asset('assets/image/nomor_logo.png'),
-                                    Text(surah.nomor.toString()),
-                                  ],
-                                )),
-                            title: Text(
-                              surah.namaLatin,
-                              style: Theme.of(context).textTheme.titleMedium!,
-                            ),
-                            subtitle: Text(
-                                '${surah.tempatTurun} - ${surah.jumlahAyat} Ayat'),
-                            trailing: Text(
-                              surah.nama,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
+                                children: [
+                                  Image.asset('assets/image/nomor_logo.png'),
+                                  Text(surah.nomor.toString()),
+                                ],
+                              )),
+                          title: Text(
+                            surah.namaLatin,
+                            style: Theme.of(context).textTheme.titleMedium!,
                           ),
-                        );
-                      },
-                    ),
+                          subtitle: Text(
+                              '${surah.tempatTurun} - ${surah.jumlahAyat} Ayat'),
+                          trailing: Text(
+                            surah.nama,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ));

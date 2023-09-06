@@ -35,7 +35,7 @@ class CardWidget extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Achmad Rizky ',
+                      'Wr.Wb ',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
