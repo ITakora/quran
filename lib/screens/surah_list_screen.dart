@@ -63,7 +63,7 @@ class _QuranListScreenState extends ConsumerState<QuranListScreen> {
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
-                                  Image.asset('assets/image/nomor.png'),
+                                  Image.asset('assets/image/nomor_logo.png'),
                                   Text(data.nomor.toString()),
                                 ],
                               )),
