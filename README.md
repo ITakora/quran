@@ -1,4 +1,4 @@
-# Quran
+# Quran App :open_book:
 
 This is my First Application i make using Flutter :smile_cat:. This Application contains reading quran, dua, etc, . Hope This App is Usefull :heart_eyes_cat:
 
