@@ -135,7 +135,9 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
                           error: (error, stackTrace) => const Center(
                             child: Text('No data'),
                           ),
-                          loading: () => const CircularProgressIndicator(),
+                          loading: () => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
                           data: (data) {
                             return JadwalList(data: data);
                           },
