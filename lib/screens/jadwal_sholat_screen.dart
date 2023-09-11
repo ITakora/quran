@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
@@ -19,6 +21,8 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   Position? position;
   bool isLoading = false;
   bool isMocked = false;
+  bool errorLocation = false;
+  bool delay = true;
 
   Future<Position> _determinePosition() async {
     LocationPermission permission;
@@ -29,13 +33,18 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
+      setState(() {
+        errorLocation = true;
+      });
+
       if (permission == LocationPermission.denied) {
         // Permissions are denied, next time you could try
         // requesting permissions again (this is also where
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
+
+        return Future.error('Acceses denied');
       }
     }
 
@@ -74,6 +83,15 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(
+      Duration(seconds: 2),
+      () {
+        setState(() {
+          delay = false;
+        });
+      },
+    );
+
     _determinePosition();
   }
 
@@ -103,49 +121,53 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
                     ))
               ],
             )
-          : userPlace.isEmpty
-              ? const Center(
+          : delay == true
+              ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 600,
-                    child: Card(
-                      color: const Color(0xFFcbe4be),
-                      elevation: 8,
-                      child: Column(children: [
-                        IconButton(
-                            onPressed: _determinePosition,
-                            icon: const Icon(
-                              Icons.pin_drop_rounded,
-                              size: 35,
-                            )),
-                        isLoading == true
-                            ? const CircularProgressIndicator()
-                            : Text(
-                                userPlace,
-                                style: const TextStyle(fontSize: 19),
+              : errorLocation == true
+                  ? Center(
+                      child: Text('Something Went Wrong...'),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 600,
+                        child: Card(
+                          color: const Color(0xFFcbe4be),
+                          elevation: 8,
+                          child: Column(children: [
+                            IconButton(
+                                onPressed: _determinePosition,
+                                icon: const Icon(
+                                  Icons.pin_drop_rounded,
+                                  size: 35,
+                                )),
+                            isLoading == true
+                                ? const CircularProgressIndicator()
+                                : Text(
+                                    userPlace,
+                                    style: const TextStyle(fontSize: 19),
+                                  ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            data.when(
+                              error: (error, stackTrace) => const Center(
+                                child: Text('No data'),
                               ),
-                        const SizedBox(
-                          height: 18,
+                              loading: () => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              data: (data) {
+                                return JadwalList(data: data);
+                              },
+                            )
+                          ]),
                         ),
-                        data.when(
-                          error: (error, stackTrace) => const Center(
-                            child: Text('No data'),
-                          ),
-                          loading: () => const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          data: (data) {
-                            return JadwalList(data: data);
-                          },
-                        )
-                      ]),
+                      ),
                     ),
-                  ),
-                ),
     );
   }
 }

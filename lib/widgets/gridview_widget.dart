@@ -26,12 +26,20 @@ class GridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDekstop = MediaQuery.of(context).size.width >= 600;
+
     return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          childAspectRatio: 3 / 3),
+      gridDelegate: isDekstop
+          ? const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              childAspectRatio: 3 / 3)
+          : const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              childAspectRatio: 3 / 3),
       children: <Widget>[
         InkWell(
           onTap: () {

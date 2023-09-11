@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           const CardWidget(),
           Expanded(
