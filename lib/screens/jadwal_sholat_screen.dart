@@ -22,7 +22,6 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   bool isLoading = false;
   bool isMocked = false;
   bool errorLocation = false;
-  bool delay = true;
 
   Future<Position> _determinePosition() async {
     LocationPermission permission;
@@ -33,9 +32,6 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      setState(() {
-        errorLocation = true;
-      });
 
       if (permission == LocationPermission.denied) {
         // Permissions are denied, next time you could try
@@ -44,6 +40,9 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
 
+        setState(() {
+          errorLocation = true;
+        });
         return Future.error('Acceses denied');
       }
     }
@@ -57,6 +56,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
     setState(() {
       isLoading = true;
     });
+
     final getPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
@@ -72,7 +72,9 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
         position = getPosition;
         userPlace = '${place.subAdministrativeArea}';
       });
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
     setState(() {
       isLoading = false;
     });
@@ -82,17 +84,8 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
 
   @override
   void initState() {
-    super.initState();
-    Future.delayed(
-      Duration(seconds: 2),
-      () {
-        setState(() {
-          delay = false;
-        });
-      },
-    );
-
     _determinePosition();
+    super.initState();
   }
 
   @override
@@ -121,7 +114,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
                     ))
               ],
             )
-          : delay == true
+          : isLoading == true
               ? Center(
                   child: CircularProgressIndicator(),
                 )
@@ -154,9 +147,8 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
                               height: 18,
                             ),
                             data.when(
-                              error: (error, stackTrace) => const Center(
-                                child: Text('No data'),
-                              ),
+                              error: (error, stackTrace) =>
+                                  Text(error.toString()),
                               loading: () => const Center(
                                 child: CircularProgressIndicator(),
                               ),
