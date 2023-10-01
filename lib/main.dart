@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quran/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'services/notification.dart';
-import 'package:timezone/data/latest.dart' as tz;
 
 final colorScheme = ColorScheme.fromSeed(
     brightness: Brightness.light,
@@ -17,10 +16,10 @@ final theme = ThemeData().copyWith(
     colorScheme: colorScheme,
     textTheme: GoogleFonts.poppinsTextTheme());
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initNotification();
-  tz.initializeTimeZones();
+  NotificationService().configureLocalTimeZone();
   runApp(
     const ProviderScope(child: MyApp()),
   );

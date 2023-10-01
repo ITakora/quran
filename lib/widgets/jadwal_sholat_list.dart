@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran/models/jadwal_sholat_model.dart';
 import 'package:quran/services/notification.dart';
-import 'package:intl/intl.dart';
 
 class JadwalList extends StatelessWidget {
   const JadwalList({super.key, required this.data});
@@ -23,11 +22,9 @@ class JadwalList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onTap: () {
-              NotificationService().showNotification(
-                title: 'Waktu Imsak',
-                body: 'Imsak',
-              );
+            onTap: () async {
+              await NotificationService()
+                  .showNotification(0, 'Waktu Imsak', 'Waktu Imsak', 'adzan');
             },
             child: ListTile(
                 shape: Border.all(),
@@ -44,23 +41,18 @@ class JadwalList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               List<String> timeParts = data.data.subuh.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
-              DateTime now = DateTime.now();
-              DateTime subuhTime =
-                  DateTime(now.year, now.month, now.day, hour, minute);
-
-              if (subuhTime.isBefore(now)) {
-                subuhTime = subuhTime.add(Duration(days: 1));
-              }
-
-              NotificationService().scheduleNotification(
-                  title: 'Waktu Dzuhur',
-                  body: 'Sholat Dzuhur',
-                  scheduledNotificationDateTime: subuhTime);
+              await NotificationService().scheduledNotification(
+                  id: 1,
+                  sound: 'adzan_subuh',
+                  title: 'Waktu Subuh',
+                  body: 'Sholat Subuh',
+                  hour: hour,
+                  minutes: minute);
             },
             child: ListTile(
                 shape: Border.all(),
@@ -72,23 +64,18 @@ class JadwalList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               List<String> timeParts = data.data.dzuhur.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
-              DateTime now = DateTime.now();
-              DateTime dzuhurTime =
-                  DateTime(now.year, now.month, now.day, hour, minute);
-
-              if (dzuhurTime.isBefore(now)) {
-                dzuhurTime = dzuhurTime.add(Duration(days: 1));
-              }
-
-              NotificationService().scheduleNotification(
+              await NotificationService().scheduledNotification(
+                  id: 2,
+                  sound: 'adzan',
                   title: 'Waktu Dzuhur',
                   body: 'Sholat Dzuhur',
-                  scheduledNotificationDateTime: dzuhurTime);
+                  hour: hour,
+                  minutes: minute);
             },
             child: ListTile(
                 shape: Border.all(),
@@ -100,23 +87,18 @@ class JadwalList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               List<String> timeParts = data.data.ashar.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
-              DateTime now = DateTime.now();
-              DateTime asharTime =
-                  DateTime(now.year, now.month, now.day, hour, minute);
-
-              if (asharTime.isBefore(now)) {
-                asharTime = asharTime.add(Duration(days: 1));
-              }
-
-              NotificationService().scheduleNotification(
+              await NotificationService().scheduledNotification(
+                  id: 3,
+                  sound: 'adzan',
                   title: 'Waktu Ashar',
                   body: 'Sholat Ashar',
-                  scheduledNotificationDateTime: asharTime);
+                  hour: hour,
+                  minutes: minute);
             },
             child: ListTile(
                 shape: Border.all(),
@@ -128,23 +110,18 @@ class JadwalList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               List<String> timeParts = data.data.maghrib.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
-              DateTime now = DateTime.now();
-              DateTime maghribTime =
-                  DateTime(now.year, now.month, now.day, hour, minute);
-
-              if (maghribTime.isBefore(now)) {
-                maghribTime = maghribTime.add(Duration(days: 1));
-              }
-
-              NotificationService().scheduleNotification(
+              await NotificationService().scheduledNotification(
+                  id: 4,
+                  sound: 'adzan',
                   title: 'Waktu Maghrib',
                   body: 'Sholat Maghrib',
-                  scheduledNotificationDateTime: maghribTime);
+                  hour: hour,
+                  minutes: minute);
             },
             child: ListTile(
                 shape: Border.all(),
@@ -156,23 +133,18 @@ class JadwalList extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               List<String> timeParts = data.data.isya.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
-              DateTime now = DateTime.now();
-              DateTime isyaTime =
-                  DateTime(now.year, now.month, now.day, hour, minute);
-
-              if (isyaTime.isBefore(now)) {
-                isyaTime = isyaTime.add(Duration(days: 1));
-              }
-
-              NotificationService().scheduleNotification(
+              await NotificationService().scheduledNotification(
+                  id: 5,
+                  sound: 'adzan',
                   title: 'Waktu Isya',
                   body: 'Sholat Isya',
-                  scheduledNotificationDateTime: isyaTime);
+                  hour: hour,
+                  minutes: minute);
             },
             child: ListTile(
                 shape: Border.all(),
