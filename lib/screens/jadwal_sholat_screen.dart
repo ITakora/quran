@@ -18,6 +18,7 @@ class JadwalScreen extends ConsumerStatefulWidget {
 
 class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   String userPlace = '';
+  String placeWithOutKota = '';
   Position? position;
   bool isLoading = false;
   bool isMocked = false;
@@ -71,6 +72,9 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
       setState(() {
         position = getPosition;
         userPlace = '${place.subAdministrativeArea}';
+        placeWithOutKota = userPlace
+            .replaceAll(RegExp(r'Kota', caseSensitive: false), '')
+            .trim();
       });
     } catch (e) {
       print(e);
@@ -90,11 +94,11 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final data = ref.watch(jadwalSholatRiverpod(userPlace));
+    final data = ref.watch(jadwalSholatRiverpod(placeWithOutKota));
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Jadwal Sholat'),
+        title: Text('Jadwal Sholat'),
       ),
       body: isMocked == true
           ? AlertDialog(

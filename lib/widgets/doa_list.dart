@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/doa_list_model.dart';
+import '../network/models/doa_list_model.dart';
 
 class DoaListWidget extends ConsumerWidget {
   const DoaListWidget({super.key, required this.data, required this.navDetail});

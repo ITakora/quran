@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:quran/models/surah_model.dart';
+import 'package:quran/network/models/surah_model.dart';
 import 'package:quran/riverpods/filter_surah_list.dart';
 
 import 'package:search_page/search_page.dart';

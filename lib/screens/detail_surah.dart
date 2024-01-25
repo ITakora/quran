@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:quran/models/detail_surah_model.dart';
-import 'package:quran/models/surah_model.dart';
+import 'package:quran/network/models/detail_surah_model.dart';
+import 'package:quran/network/models/surah_model.dart';
 import 'package:quran/riverpods/detail_surah_riverpod.dart';
 
 class DetailSurahScreen extends ConsumerStatefulWidget {
@@ -83,9 +83,7 @@ class _DetailSurahScreenState extends ConsumerState<DetailSurahScreen> {
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge!
-                                  .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 28),
+                                  .copyWith(fontSize: 30),
                             ),
                           ),
                         ],

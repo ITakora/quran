@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran/models/jadwal_sholat_model.dart';
+import 'package:quran/network/models/jadwal_sholat_model.dart';
 import 'package:quran/services/notification.dart';
 
 class JadwalList extends StatelessWidget {
@@ -12,7 +12,7 @@ class JadwalList extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            data.data.tanggal,
+            data.data.jadwal.tanggal,
             style: const TextStyle(fontSize: 18),
           ),
         ),
@@ -33,7 +33,7 @@ class JadwalList extends StatelessWidget {
                   style: TextStyle(fontSize: 18),
                 ),
                 trailing: Text(
-                  data.data.imsak,
+                  data.data.jadwal.imsak,
                   style: const TextStyle(fontSize: 18),
                 )),
           ),
@@ -42,7 +42,7 @@ class JadwalList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () async {
-              List<String> timeParts = data.data.subuh.split(':');
+              List<String> timeParts = data.data.jadwal.subuh.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
@@ -57,7 +57,7 @@ class JadwalList extends StatelessWidget {
             child: ListTile(
                 shape: Border.all(),
                 title: const Text('Subuh :', style: TextStyle(fontSize: 18)),
-                trailing: Text(data.data.subuh,
+                trailing: Text(data.data.jadwal.subuh,
                     style: const TextStyle(fontSize: 18))),
           ),
         ),
@@ -65,7 +65,7 @@ class JadwalList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () async {
-              List<String> timeParts = data.data.dzuhur.split(':');
+              List<String> timeParts = data.data.jadwal.dzuhur.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
@@ -80,7 +80,7 @@ class JadwalList extends StatelessWidget {
             child: ListTile(
                 shape: Border.all(),
                 title: const Text('Dzuhur :', style: TextStyle(fontSize: 18)),
-                trailing: Text(data.data.dzuhur,
+                trailing: Text(data.data.jadwal.dzuhur,
                     style: const TextStyle(fontSize: 18))),
           ),
         ),
@@ -88,7 +88,7 @@ class JadwalList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () async {
-              List<String> timeParts = data.data.ashar.split(':');
+              List<String> timeParts = data.data.jadwal.ashar.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
@@ -103,7 +103,7 @@ class JadwalList extends StatelessWidget {
             child: ListTile(
                 shape: Border.all(),
                 title: const Text('Ashar :', style: TextStyle(fontSize: 18)),
-                trailing: Text(data.data.ashar,
+                trailing: Text(data.data.jadwal.ashar,
                     style: const TextStyle(fontSize: 18))),
           ),
         ),
@@ -111,7 +111,7 @@ class JadwalList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () async {
-              List<String> timeParts = data.data.maghrib.split(':');
+              List<String> timeParts = data.data.jadwal.maghrib.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
@@ -126,7 +126,7 @@ class JadwalList extends StatelessWidget {
             child: ListTile(
                 shape: Border.all(),
                 title: const Text('Maghrib :'),
-                trailing: Text(data.data.maghrib,
+                trailing: Text(data.data.jadwal.maghrib,
                     style: const TextStyle(fontSize: 18))),
           ),
         ),
@@ -134,7 +134,7 @@ class JadwalList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () async {
-              List<String> timeParts = data.data.isya.split(':');
+              List<String> timeParts = data.data.jadwal.isya.split(':');
               int hour = int.parse(timeParts[0]);
               int minute = int.parse(timeParts[1]);
 
@@ -149,8 +149,8 @@ class JadwalList extends StatelessWidget {
             child: ListTile(
                 shape: Border.all(),
                 title: const Text('Isya :', style: TextStyle(fontSize: 18)),
-                trailing:
-                    Text(data.data.isya, style: const TextStyle(fontSize: 18))),
+                trailing: Text(data.data.jadwal.isya,
+                    style: const TextStyle(fontSize: 18))),
           ),
         ),
       ],

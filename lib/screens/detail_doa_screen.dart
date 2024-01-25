@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran/models/doa_list_model.dart';
+import 'package:quran/network/models/doa_list_model.dart';
 
 class DoaDetail extends StatelessWidget {
   const DoaDetail({super.key, required this.doaDetail});

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:quran/models/doa_list_model.dart';
+import 'package:quran/network/models/doa_list_model.dart';
 
 import 'package:quran/riverpods/doa_list_riverpod.dart';
 
