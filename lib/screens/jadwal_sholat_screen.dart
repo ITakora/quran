@@ -18,7 +18,7 @@ class JadwalScreen extends ConsumerStatefulWidget {
 
 class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   String userPlace = '';
-  String placeWithOutKota = '';
+  String userPlaceWithOutKota = '';
   Position? position;
   bool isLoading = false;
   bool isMocked = false;
@@ -72,7 +72,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
       setState(() {
         position = getPosition;
         userPlace = '${place.subAdministrativeArea}';
-        placeWithOutKota = userPlace
+        userPlaceWithOutKota = userPlace
             .replaceAll(RegExp(r'Kota', caseSensitive: false), '')
             .trim();
       });
@@ -94,7 +94,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final data = ref.watch(jadwalSholatRiverpod(placeWithOutKota));
+    final data = ref.watch(jadwalSholatRiverpod(userPlace.toLowerCase()));
 
     return Scaffold(
       appBar: AppBar(
@@ -144,7 +144,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
                             isLoading == true
                                 ? const CircularProgressIndicator()
                                 : Text(
-                                    userPlace,
+                                    userPlaceWithOutKota,
                                     style: const TextStyle(fontSize: 19),
                                   ),
                             const SizedBox(

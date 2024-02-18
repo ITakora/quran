@@ -9,12 +9,13 @@ class JadwalSholatApi {
   Future<JadwalSholat> getJadwalSholat(String userLoc) async {
     try {
       if (userLoc.isNotEmpty) {
-        // final url =
-        //     Uri.parse('https://api.myquran.com/v2/sholat/kota/cari/$userLoc');
-        // final response = await http.get(url);
+        final url =
+            Uri.parse('https://api.myquran.com/v2/sholat/kota/cari/$userLoc');
+        final response = await http.get(url);
 
-        // List data = (jsonDecode(response.body) as Map<String, dynamic>)['kota'];
-        // final dataId = data.map((e) => e['id']).toList();
+        List data = (jsonDecode(response.body) as Map<String, dynamic>)['data'];
+
+        final dataId = data.map((e) => e['id']).toList();
 
         DateTime dateToday = DateTime.now();
         final year = dateToday.year;
@@ -22,7 +23,7 @@ class JadwalSholatApi {
         final day = dateToday.day;
 
         final uri = Uri.parse(
-            'https://api.myquran.com/v2/sholat/jadwal/1106/$year/$month/$day');
+            'https://api.myquran.com/v2/sholat/jadwal/${dataId[0]}/$year/$month/$day');
 
         final responseData = await http.get(uri);
         Map<String, dynamic> jadwal = (jsonDecode(responseData.body));
