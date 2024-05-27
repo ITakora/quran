@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
-
+import 'package:autostart_settings/autostart_settings.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'package:quran/riverpods/jadwal_sholat_riverpod.dart';
@@ -23,6 +24,14 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   bool isLoading = false;
   bool isMocked = false;
   bool errorLocation = false;
+
+  void initAutoStart() async {
+    final canOpen =
+        await AutostartSettings.canOpen(autoStart: true, batterySafer: true);
+    if (canOpen) {
+      await AutostartSettings.open(autoStart: true, batterySafer: true);
+    }
+  }
 
   Future<Position> _determinePosition() async {
     LocationPermission permission;
@@ -88,6 +97,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
 
   @override
   void initState() {
+    initAutoStart();
     _determinePosition();
     super.initState();
   }

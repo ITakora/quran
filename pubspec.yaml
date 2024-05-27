@@ -43,6 +43,10 @@ dependencies:
   geocoding: ^2.0.6
   flutter_local_notifications: ^15.1.1
   flutter_timezone: ^1.0.7
+  android_autostart: ^0.0.3
+  autostart_settings: ^0.1.2
+ 
+ 
 
 dev_dependencies:
   flutter_test:

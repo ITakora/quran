@@ -26,7 +26,7 @@ class CardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 9),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -66,7 +66,7 @@ class CardWidget extends StatelessWidget {
                   ? Lottie.asset('assets/lottie/animasi_quran.json',
                       width: 300, height: 300)
                   : Lottie.asset('assets/lottie/animasi_quran.json',
-                      width: 180, height: 200),
+                      width: 170, height: 200),
             ],
           ),
         ),

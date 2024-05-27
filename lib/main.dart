@@ -12,7 +12,6 @@ final colorScheme = ColorScheme.fromSeed(
 
 final theme = ThemeData().copyWith(
     primaryColor: const Color(0xFF4361ee),
-    useMaterial3: true,
     colorScheme: colorScheme,
     textTheme: GoogleFonts.poppinsTextTheme());
 
