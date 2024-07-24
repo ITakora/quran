@@ -5,7 +5,7 @@ This is my First Application i make using Flutter :smile_cat:. This Application 
 
 ## Demo Application
 
-
+![alt text](https://github.com/[ITakora]/[quran]/blob/[main]/home.png?raw=true)
 
 
 
