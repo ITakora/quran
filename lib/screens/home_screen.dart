@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             statusBarColor: Colors.transparent),
         toolbarHeight: 70,
         title: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Text(
             'Al qur${"'"}an',
             style: Theme.of(context)
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
           const CardWidget(),
           Expanded(
             child: Container(
-                margin: const EdgeInsets.only(right: 16, left: 16, top: 18),
+                margin: const EdgeInsets.only(right: 16, left: 16, top: 15),
                 child: const GridViewWidget()),
           ),
         ],

@@ -22,10 +22,10 @@ class _BottomNavState extends State<BottomNav> {
       data: NavigationBarThemeData(
         surfaceTintColor: Colors.white,
         indicatorColor: Colors.white,
-        labelTextStyle: MaterialStatePropertyAll(
+        labelTextStyle: WidgetStatePropertyAll(
           TextStyle(
             fontSize: 12,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ),

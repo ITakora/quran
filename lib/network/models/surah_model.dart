@@ -1,5 +1,5 @@
 class Surah {
-  int? nomor;
+  int nomor;
   String nama;
   String namaLatin;
   int jumlahAyat;

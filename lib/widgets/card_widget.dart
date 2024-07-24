@@ -10,7 +10,7 @@ class CardWidget extends StatelessWidget {
     bool isDekstop = MediaQuery.of(context).size.width >= 600;
 
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8),
       child: SizedBox(
         width: double.infinity,
         height: 250,
