@@ -5,7 +5,8 @@ This is my First Application i make using Flutter :smile_cat:. This Application 
 
 ## Demo Application
 
-![alt text](https://github.com/[ITakora]/[quran]/blob/[main]/screenshoot/home.png?raw=true)
+
+![Uploading Screenshot_1720268647.png…]()
 
 
 
