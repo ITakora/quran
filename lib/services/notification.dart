@@ -43,7 +43,12 @@ class NotificationService {
         NotificationResponse notificationResponse,
       ) async {},
     );
-
+    final androidImplementation =
+        notificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+    if (androidImplementation != null) {
+      await androidImplementation.requestPermission();
+    }
     List<PendingNotificationRequest> pendingNotifications =
         await notificationsPlugin.pendingNotificationRequests();
 
