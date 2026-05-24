@@ -2,7 +2,8 @@
 
 This is my First Application i make using Flutter :smile_cat:. This Application contains reading quran, dua, etc, . Hope This App is Usefull :heart_eyes_cat:
 
-
+## 📢 Technical Disclaimer (Hadith Section)
+> ⚠️ **Note:** This feature is currently unavailable due to an external API service issue.
 
 
 ## Demo Application
