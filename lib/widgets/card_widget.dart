@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lottie/lottie.dart';
 
 class CardWidget extends StatelessWidget {
@@ -25,41 +24,51 @@ class CardWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 9),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Assalamualikum',
-                      style: isDekstop
-                          ? Theme.of(context).textTheme.displayMedium!.copyWith(
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 9),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Assalamualikum',
+                        style: isDekstop
+                            ? Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                )
+                            : Theme.of(context).textTheme.titleLarge!.copyWith(
+                                fontSize: 21,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              )
-                          : Theme.of(context).textTheme.titleLarge!.copyWith(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Wr.Wb ',
-                      style: isDekstop
-                          ? Theme.of(context).textTheme.displaySmall!.copyWith(
+                                fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Wr.Wb ',
+                        style: isDekstop
+                            ? Theme.of(context)
+                                .textTheme
+                                .displaySmall!
+                                .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                )
+                            : Theme.of(context).textTheme.titleMedium!.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
-                              )
-                          : Theme.of(context).textTheme.titleMedium!.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 19),
-                    ),
-                    isDekstop
-                        ? SizedBox(
-                            height: 10,
-                          )
-                        : const SizedBox(
-                            height: 80,
-                          ),
-                  ],
+                                fontSize: 19),
+                      ),
+                      isDekstop
+                          ? SizedBox(
+                              height: 10,
+                            )
+                          : const SizedBox(
+                              height: 80,
+                            ),
+                    ],
+                  ),
                 ),
               ),
               isDekstop
