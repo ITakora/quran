@@ -1,12 +1,10 @@
 import 'dart:async';
 
+import 'package:autostart_settings/autostart_settings.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:autostart_settings/autostart_settings.dart';
 import 'package:geolocator/geolocator.dart';
-
 import 'package:quran/riverpods/jadwal_sholat_riverpod.dart';
 import 'package:quran/widgets/jadwal_sholat_list.dart';
 
@@ -140,7 +138,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
                         width: double.infinity,
-                        height: 600,
+                        height: 700,
                         child: Card(
                           color: const Color(0xFFcbe4be),
                           elevation: 8,
