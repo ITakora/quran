@@ -1,75 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quran/network/models/jadwal_sholat_model.dart';
-import 'package:quran/services/notification.dart';
+import 'package:quran/riverpods/notification_riverpod.dart';
 
-class JadwalList extends StatefulWidget {
+class JadwalList extends ConsumerWidget {
   const JadwalList({super.key, required this.data});
   final JadwalSholat data;
 
   @override
-  State<JadwalList> createState() => _JadwalListState();
-}
-
-class _JadwalListState extends State<JadwalList> {
-  final Map<String, bool> _activeNotifications = {
-    'Imsak': false,
-    'Subuh': false,
-    'Dzuhur': false,
-    'Ashar': false,
-    'Maghrib': false,
-    'Isya': false,
-  };
-
-  Future<void> _toggleNotification({
-    required String name,
-    required String timeString,
-    required int id,
-    required String sound,
-    required String body,
-  }) async {
-    final bool isCurrentlyOn = _activeNotifications[name] ?? false;
-
-    if (isCurrentlyOn) {
-      setState(() {
-        _activeNotifications[name] = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Notifikasi $name dimatikan')),
-      );
-    } else {
-      try {
-        List<String> timeParts = timeString.split(':');
-        int hour = int.parse(timeParts[0]);
-        int minute = int.parse(timeParts[1]);
-
-        await NotificationService().scheduledNotification(
-            id: id,
-            sound: sound,
-            title: 'Waktu $name',
-            body: body,
-            hour: hour,
-            minutes: minute);
-
-        setState(() {
-          _activeNotifications[name] = true;
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Notifikasi $name dijadwalkan pukul $timeString')),
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Gagal menjadwalkan notifikasi')),
-        );
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final jadwal = widget.data.data.jadwal;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final jadwal = data.data.jadwal;
+    final notifState = ref.watch(notificationProvider);
+    final notifNotifier = ref.read(notificationProvider.notifier);
 
     final List<Map<String, dynamic>> items = [
       {
@@ -127,7 +69,7 @@ class _JadwalListState extends State<JadwalList> {
         const SizedBox(height: 15),
         ...items.map((item) {
           final String name = item['name'];
-          final bool isOn = _activeNotifications[name] ?? false;
+          final bool isOn = notifState[name] ?? false;
 
           return Padding(
             padding:
@@ -137,16 +79,9 @@ class _JadwalListState extends State<JadwalList> {
                 side: const BorderSide(color: Colors.grey, width: 1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              title: Text(
-                '$name :',
-                style: const TextStyle(fontSize: 18),
-              ),
-              subtitle: Text(
-                item['time'],
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
+              title: Text('$name :', style: const TextStyle(fontSize: 18)),
+              subtitle:
+                  Text(item['time'], style: const TextStyle(fontSize: 16)),
               trailing: IconButton(
                 icon: Icon(
                   isOn
@@ -155,7 +90,7 @@ class _JadwalListState extends State<JadwalList> {
                   color: isOn ? Colors.green : Colors.grey,
                   size: 28,
                 ),
-                onPressed: () => _toggleNotification(
+                onPressed: () => notifNotifier.toggle(
                   name: name,
                   timeString: item['time'],
                   id: item['id'],

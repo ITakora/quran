@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:quran/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quran/screens/home_screen.dart';
+
 import 'services/notification.dart';
 
 final colorScheme = ColorScheme.fromSeed(
-    brightness: Brightness.light,
-    seedColor: const Color(0xFF4361ee),
-    surface: Colors.transparent);
+  brightness: Brightness.light,
+  seedColor: const Color(0xFF4361ee),
+);
 
 final theme = ThemeData().copyWith(
     primaryColor: const Color(0xFF4361ee),

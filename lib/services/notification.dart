@@ -106,6 +106,10 @@ class NotificationService {
         ));
   }
 
+  Future<void> cancelNotification({required int id}) async {
+    await notificationsPlugin.cancel(id: id);
+  }
+
   scheduledNotification({
     required String title,
     required String body,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:quran/widgets/card_widget.dart';
 import 'package:quran/widgets/gridview_widget.dart';
 
@@ -13,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.dark,
             statusBarColor: Colors.transparent),
         toolbarHeight: 70,

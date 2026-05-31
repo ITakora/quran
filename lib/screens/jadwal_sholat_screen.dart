@@ -19,7 +19,7 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   String userPlace = '';
   String userPlaceWithOutKota = '';
   Position? position;
-  bool isLoading = false;
+  bool isLoading = true;
   bool isMocked = false;
   bool errorLocation = false;
 
@@ -34,36 +34,22 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
   Future<Position> _determinePosition() async {
     LocationPermission permission;
 
-    // Test if location services are enabled.
     await Geolocator.isLocationServiceEnabled();
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-
-        setState(() {
-          errorLocation = true;
-        });
-        return Future.error('Acceses denied');
+        setState(() => errorLocation = true);
+        return Future.error('Access denied');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error('Location permissions are permanently denied.');
     }
 
-    setState(() {
-      isLoading = true;
-    });
+    setState(() => isLoading = true);
 
     final getPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -82,22 +68,21 @@ class _JadwalScreenState extends ConsumerState<JadwalScreen> {
         userPlaceWithOutKota = userPlace
             .replaceAll(RegExp(r'Kota', caseSensitive: false), '')
             .trim();
+        isLoading = false;
       });
     } catch (e) {
       print(e);
+      setState(() => isLoading = false);
     }
-    setState(() {
-      isLoading = false;
-    });
 
     return getPosition;
   }
 
   @override
   void initState() {
+    super.initState();
     initAutoStart();
     _determinePosition();
-    super.initState();
   }
 
   @override
